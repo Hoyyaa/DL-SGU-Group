@@ -5,7 +5,6 @@
 /data/splits/val.csv
 /runs/
 /runs_smoke/
-data/raw/
 .venv/
 __pycache__/
-.ipynb_checkpoints/
+*.npz
