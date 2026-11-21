@@ -1,0 +1,7 @@
+*.egg-info/
+.ipynb_checkpoints/
+/data/raw/
+/data/processed/
+/data/splits/val.csv
+/runs/
+/runs_smoke/
