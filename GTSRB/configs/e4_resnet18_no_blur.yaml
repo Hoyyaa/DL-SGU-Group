@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e4
+model: {name: resnet18}
+aug: {blur: false}

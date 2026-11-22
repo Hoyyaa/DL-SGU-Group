@@ -9,8 +9,8 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision.transforms import v2
 
-from src.gtsrb.data.cache import load_checked_cache
-from src.gtsrb.utils.config import ROOT
+from gtsrb.data.cache import load_checked_cache
+from gtsrb.utils.config import ROOT
 
 
 class GTSRBDataset(Dataset):

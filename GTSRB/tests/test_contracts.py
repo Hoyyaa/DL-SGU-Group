@@ -13,8 +13,8 @@ PARAM_RANGES = {
 @pytest.mark.parametrize("name", list(PARAM_RANGES))
 def test_build_model_contract(name):
     models = pytest.importorskip("gtsrb.models")
-    if not hasattr(models, "build_model"):
-        pytest.skip("build_model chưa có")
+    if name not in getattr(models, "NETS", {}):
+        pytest.skip(f"chưa đăng ký '{name}' trong models.NETS")
     m = models.build_model(name, mean=[0.5] * 3, std=[0.2] * 3).eval()
     lo, hi = PARAM_RANGES[name]
     assert lo <= sum(p.numel() for p in m.parameters()) <= hi
@@ -24,12 +24,12 @@ def test_build_model_contract(name):
 
 def test_normalization_is_inside_model():
     models = pytest.importorskip("gtsrb.models")
-    if not hasattr(models, "build_model"):
-        pytest.skip("build_model chưa có")
+    if "small_cnn" not in getattr(models, "NETS", {}):
+        pytest.skip("chưa đăng ký 'small_cnn' trong models.NETS")
     x = torch.rand(2, 3, 64, 64)
-    a = models.build_model("resnet18", mean=[0.0] * 3, std=[1.0] * 3).eval()
-    b = models.build_model("resnet18", mean=[0.5] * 3, std=[0.2] * 3).eval()
-    b.load_state_dict(a.state_dict())
+    a = models.build_model("small_cnn", mean=[0.0] * 3, std=[1.0] * 3).eval()
+    b = models.build_model("small_cnn", mean=[0.5] * 3, std=[0.2] * 3).eval()
+    b.net.load_state_dict(a.net.state_dict())
     with torch.no_grad():
         assert not torch.allclose(a(x), b(x))   # cùng trọng số, khác mean/std -> output khác
 

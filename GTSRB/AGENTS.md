@@ -16,7 +16,10 @@ Bạn đang giúp một thành viên của nhóm 3 người làm đồ án Học
 - Không chia train/val lại. Dùng `data/splits/split_manifest.csv`; không sắp xếp lại dòng. Cache lệch manifest thì `load_checked_cache` báo lỗi, đừng tắt lỗi.
 - Tập test chỉ dùng trong `evaluate.py`, sau khi đã gắn tag `exp-v1`. Không dùng test để chọn lr, epoch hay mô hình.
 - Seed lấy từ `--seed`, không ghi cứng trong YAML. Mọi run ghi `config.yaml` và `env.json`.
-- Không commit dữ liệu, `.npz`, `.pt`, `runs/`. Không dùng `git add .`.
+- Không commit dữ liệu, `.npz`, `.pt`, `runs/`, ảnh kiểm tra tạm (`cache_check.png`...). Không dùng `git add .`.
+- Import luôn là `from gtsrb...` (package cài bằng `pip install -e .`). Không bao giờ `from src.gtsrb...`: IDE hay tự gợi ý như vậy và làm hỏng import khi chạy ở nơi khác.
+- Không ghi đè thư mục run đã có. Chạy lại cùng seed thì dùng `--resume` hoặc chọn thư mục khác.
+- Sau mỗi run thật, ghi một dòng vào Google Sheet nhật ký và đẩy log lên Drive (xem README).
 - Không đổi hợp đồng một mình. Nếu cần đổi, nói rõ với người dùng để họ mở Issue.
 
 ## Cách làm
