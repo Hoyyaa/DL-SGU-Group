@@ -74,11 +74,13 @@ def build_train_cache(raw_dir: Path, manifest_path: Path, out_path: Path, stats_
 
 
 def build_test_cache(test_dir: Path, csv_path: Path, out_path: Path, size: int, use_roi: bool):
-    gt = pd.read_csv(csv_path, sep=";")  # GTSRB gốc: Filename;...;Roi.X1;Roi.Y1;Roi.X2;Roi.Y2;ClassId
-    gt = gt.rename(columns={"Roi.X1": "x1", "Roi.Y1": "y1", "Roi.X2": "x2", "Roi.Y2": "y2"})
-    x = np.stack([load_image(test_dir / r.Filename, size, _roi_of(r, use_roi)) for r in gt.itertuples()])
+    """Đọc Test.csv (Kaggle: dấu phẩy, cột Path/ClassId/Roi.*; GTSRB gốc: dấu chấm phẩy, cột Filename)."""
+    gt = pd.read_csv(csv_path, sep=None, engine="python")  # tự nhận dấu , hoặc ;
+    gt = gt.rename(columns={"Path": "Filename", "Roi.X1": "x1", "Roi.Y1": "y1", "Roi.X2": "x2", "Roi.Y2": "y2"})
+    files = gt["Filename"].astype(str).str.removeprefix("Test/")  # bỏ tiền tố Test/ nếu có
+    x = np.stack([load_image(test_dir / f, size, _roi_of(r, use_roi)) for f, r in zip(files, gt.itertuples())])
     np.savez(out_path, x=x, y=gt["ClassId"].to_numpy(dtype=np.int64),
-             paths=gt["Filename"].to_numpy(dtype=str), size=size, use_roi=use_roi)
+             paths=files.to_numpy(dtype=str), size=size, use_roi=use_roi)
     print(f"Cache test: {x.shape}, use_roi={use_roi} -> {out_path}")
 
 
