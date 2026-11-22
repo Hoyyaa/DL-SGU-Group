@@ -9,8 +9,8 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision.transforms import v2
 
-from gtsrb.data.cache import load_checked_cache
-from gtsrb.utils.config import ROOT
+from src.gtsrb.data.cache import load_checked_cache
+from src.gtsrb.utils.config import ROOT
 
 
 class GTSRBDataset(Dataset):
@@ -23,7 +23,7 @@ class GTSRBDataset(Dataset):
     def __getitem__(self, i):
         img = torch.from_numpy(self.x[i]).permute(2, 0, 1).float() / 255.0  # HWC uint8 -> CHW [0,1]
         if self.transform is not None:
-            img = self.transform(img)
+            img = self.transform(img).clamp_(0.0, 1.0)   # làm mờ có thể vượt 1 một chút do sai số float
         return img, int(self.y[i])
 
 
