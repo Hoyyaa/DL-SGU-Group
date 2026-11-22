@@ -1,0 +1,4 @@
+_base_: base.yaml
+# E1 (CNN nhỏ) có thể dùng lr / weight_decay riêng, chọn từ lưới tuning; thêm vào đây: train: {lr: ..., weight_decay: ...}
+name: e1
+model: {name: small_cnn}

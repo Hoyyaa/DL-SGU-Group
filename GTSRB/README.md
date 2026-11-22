@@ -37,24 +37,47 @@ GTSRB/
 ├── docs/               CONTRACTS.md, TASKS.md
 ├── src/gtsrb/
 │   ├── data/           make_split.py, cache.py, dataset.py, corruptions.py (C)
-│   ├── models/         small_cnn.py, resnet18.py, plain18.py, __init__.py: build_model (B)
+│   ├── models/         __init__.py (Classifier, build_model, NETS), small_cnn.py (A); resnet18.py, plain18.py (B)
 │   ├── utils/          config.py (load_config, ROOT), seed.py (set_seed)
-│   ├── train.py        huấn luyện
-│   └── evaluate.py     chấm test theo điều kiện orig / dark / blur
+│   ├── train.py        huấn luyện (A)
+│   └── evaluate.py     chấm test theo điều kiện orig / dark / blur (C)
 ├── tests/              pytest; test_contracts.py là "đặc tả chạy được"
 └── notebooks/          00 đến 06, mỗi notebook một người phụ trách
 ```
+
+## Chạy huấn luyện
+
+```bash
+# thử pipeline: ~10% dữ liệu, tối đa 2 epoch, ghi vào thư mục tạm
+python -m gtsrb.train --config configs/e1_small_cnn.yaml --seed 42 --out_dir runs_smoke --fast
+
+# chạy thật (Colab: out_dir nằm trên Drive để không mất khi ngắt phiên)
+python -m gtsrb.train --config configs/e1_small_cnn.yaml --seed 42 --out_dir /content/drive/MyDrive/gtsrb/runs
+
+# Colab ngắt giữa chừng: chạy lại đúng lệnh trên, thêm --resume
+```
+
+Mỗi run ra `<out_dir>/<name>_s<seed>/` gồm `best.pt`, `last.pt`, `config.yaml`, `log.csv`, `env.json`.
+Thư mục đã có kết quả sẽ không bị ghi đè (cần `--resume`, hoặc xóa thư mục nếu muốn chạy lại từ đầu).
+Sáu cấu hình thí nghiệm E1 đến E6 nằm trong `configs/`.
+
+## Quản lý thí nghiệm
+
+- **Kết quả:** thư mục Google Drive chung (`runs/`, `results/`, `figures/`). Checkpoint `.pt` chỉ để trên Drive, không vào Git.
+- **Nhật ký:** một Google Sheet, mỗi lần chạy một dòng (cột ở mục 6 của `docs/CONTRACTS.md`). Người chạy tự ghi dòng của mình ngay sau khi run xong.
+- Cột Macro-F1 test chỉ được điền sau khi đã gắn tag `exp-v1`.
 
 ## Trạng thái
 
 | Phần | Người phụ trách | Trạng thái |
 | --- | --- | --- |
 | Khung repo, config, seed | A | xong |
-| Chia tập, cache, norm_stats, dataset | A | xong (dataset.py cần chạy thử với PyTorch thật) |
-| `train.py`, `small_cnn.py` | A | chưa làm |
-| `resnet18.py`, `plain18.py`, `build_model` | B | chưa làm |
-| `corruptions.py`, `evaluate.py` | C | chưa làm |
-| Notebook, demo, báo cáo | cả nhóm | chưa làm |
+| Chia tập, cache train và test, norm_stats, dataset | A | xong, đã chạy thử với PyTorch |
+| `models/__init__.py` (Classifier, build_model), `small_cnn.py`, `train.py`, configs E1–E6 | A | PR `feat/train` |
+| `resnet18.py`, `plain18.py` và đăng ký vào `NETS` | B | chưa làm |
+| `corruptions.py`, `evaluate.py` (kèm params và latency) | C | chưa làm |
+| Thư mục Drive, Google Sheet nhật ký | C | chưa làm |
+| Notebook, demo, slide, báo cáo | cả nhóm | chưa làm |
 
 Cập nhật bảng này mỗi khi merge một PR.
 

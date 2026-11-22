@@ -5,36 +5,41 @@ Phần nào chờ phần khác thì dùng mô hình giả (stub) để không b�
 
 ## A. Nhóm trưởng: dữ liệu và huấn luyện
 
-**A1. Chạy thử `dataset.py` với PyTorch thật** (30 phút)
-- Lấy một batch từ `build_dataloaders(cfg, fast=True)`. Kỳ vọng `x.shape == (64,3,64,64)`, float32, min ≥ 0, max ≤ 1.
-- Xong khi: dán kết quả vào PR; nếu min/max ngoài [0,1] thì sửa `build_train_transform`.
+**A0. Dọn commit gần đây** (15 phút, làm đầu tiên)
+- `dataset.py` đang có `from src.gtsrb...`: đổi lại thành `from gtsrb...`.
+- `cache_check.png` đã bị commit nhầm: `git rm --cached cache_check.png` rồi thêm dòng `/*.png` vào `GTSRB/.gitignore` (chỉ chặn ảnh nằm ở thư mục gốc; ảnh minh họa chính thức để trong `docs/figures/`).
 
-**A2. `src/gtsrb/models/small_cnn.py`** (nhánh `feat/small-cnn`)
-- Lớp `SmallCNN(num_classes=43)`, nhận ảnh đã chuẩn hóa, ra logits (B,43). Khoảng 99.019 tham số (mục 6.3 kế hoạch).
-- Xong khi: test số tham số trong khoảng 9,5e4 đến 1,05e5; forward (2,3,64,64) ra (2,43).
+**A1. Chạy thử `dataset.py` với PyTorch thật**: xong (x trong [0,1], float32, 3.137 train / 783 val với `--fast`).
 
-**A3. `src/gtsrb/train.py`** (nhánh `feat/train`)
+**A2. `models/__init__.py` (Classifier, build_model, NETS) và `models/small_cnn.py`** (nhánh `feat/train`, cùng PR với A3)
+- `SmallCNN(num_classes=43)` có 99.019 tham số. `build_model` có registry `NETS`; B chỉ cần thêm dòng cho resnet18 và plain18.
+- Xong khi: `tests/test_contracts.py` phần small_cnn xanh.
+
+**A3. `src/gtsrb/train.py` và `configs/e1` đến `e6`** (nhánh `feat/train`)
 - CLI theo mục 4 của CONTRACTS: `--config --seed --out_dir --fast --resume`.
-- AdamW, scheduler cosine, AMP, chọn `best.pt` theo Macro-F1 val (dùng `sklearn.metrics.f1_score(average="macro")`).
-- Ghi `log.csv`, `config.yaml`, `env.json`, `best.pt`, `last.pt`.
-- Xong khi: `--fast` chạy hết 1–2 epoch trên ResNet-18 hoặc SmallCNN; `--resume` tiếp tục đúng epoch; chạy lại cùng seed ra loss epoch đầu gần giống nhau.
-- Việc này chặn B và C ở bước chạy thật, nên làm sớm.
+- AdamW, cosine, AMP, chọn `best.pt` theo Macro-F1 val.
+- Xong khi: `pytest -q` xanh (gồm `test_train_smoke.py`), `--fast` chạy hết trên E1 với dữ liệu thật, `--resume` tiếp tục đúng epoch.
+- Việc này chặn B và C ở bước chạy thật, nên làm và merge trước.
 
-**A4. Notebook 00 (Colab setup) và 01 (EDA)**; **A5. README tái lập** (làm dần, xong trước ngày nộp).
+**A4. Tuning E1 rồi chạy E1 và E3** (3 seed). Ghi từng run vào Google Sheet.
+**A5. Notebook 00 và 01, README tái lập, báo cáo chương 1, 3, 5.**
 
 ## B. Mô hình
 
-**B1. `src/gtsrb/models/resnet18.py`, `plain18.py`, `__init__.py`** (nhánh `feat/models`)
-- `BasicBlock(cin, cout, stride=1, skip=True)`, `ResNet18(num_classes=43, skip=True)`, `Plain18` = ResNet18 với `skip=False`.
-- `build_model(name, num_classes=43, mean=None, std=None)` và `Classifier(net, mean, std)` theo mục 2 của CONTRACTS.
-- Xong khi: test số tham số (resnet18: 1,11e7–1,13e7; plain18: 1,09e7–1,11e7), forward (2,3,64,64) ra (2,43), và đổi `mean` thì output đổi (chuẩn hóa nằm trong mô hình).
-- `build_model("small_cnn")` import `SmallCNN` từ A2; trong lúc chờ có thể dùng lớp giả.
+**B1. `src/gtsrb/models/resnet18.py`, `plain18.py` và đăng ký vào `NETS`** (nhánh `feat/models`, bắt đầu sau khi PR `feat/train` của A được merge)
+- `BasicBlock(cin, cout, stride=1, skip=True)`, `ResNet18(num_classes=43, skip=True)`; Plain-18 là `ResNet18(skip=False)`. Đăng ký hai dòng vào `NETS` (xem chú thích trong `models/__init__.py`); `Classifier` và `build_model` đã do A viết.
+- Xong khi: `tests/test_contracts.py` xanh cho resnet18 và plain18 (số tham số 1,11e7–1,13e7 và 1,09e7–1,11e7; forward (2,3,64,64) ra (2,43)).
+- Trong lúc chờ PR của A, B viết và thử lớp mô hình ngay trong nhánh của mình.
 
 **B2. Tuning lr và weight decay cho E2** sau khi A3 merge: lưới lr ∈ {1e-3, 3e-4} × wd ∈ {1e-4, 1e-2}, 10 epoch, seed 42. Chọn theo Macro-F1 val rồi sửa `configs/base.yaml`. Gắn tag `exp-v1`.
 
-**B3. Notebook 03 (mô hình) và chạy E2, E6** (3 seed). Phần phương pháp trong báo cáo.
+**B3. Notebook 03 (mô hình) và chạy E2, E6** (3 seed), ghi từng run vào Google Sheet. Báo cáo chương 2 (CNN, ResNet, skip connection).
 
-## C. Đánh giá, demo, báo cáo (khối lượng nhẹ hơn nhưng độc lập)
+## C. Đánh giá, nhật ký, demo, báo cáo (khối lượng nhẹ hơn nhưng độc lập)
+
+**C0. Thư mục Drive chung và Google Sheet nhật ký** (30 phút, làm ngay)
+- Cấu trúc và cột theo mục 6 của CONTRACTS. Chia quyền sửa cho cả nhóm, quyền xem cho giảng viên khi nộp.
+- Điền sẵn sáu dòng E1–E6 (trạng thái "chưa chạy") theo ma trận thí nghiệm.
 
 **C1. `src/gtsrb/data/corruptions.py`** (nhánh `feat/corruptions`)
 - Theo mục 3 của CONTRACTS. Chỉ cần PyTorch và torchvision, không phụ thuộc mô hình hay dữ liệu thật.
@@ -42,13 +47,18 @@ Phần nào chờ phần khác thì dùng mô hình giả (stub) để không b�
 
 **C2. `src/gtsrb/evaluate.py`**
 - CLI theo mục 5 của CONTRACTS; dùng `torch.load(best.pt)` rồi `build_model` từ `cfg` trong checkpoint.
-- Dùng mô hình giả (nhận (B,3,64,64), ra (B,43)) để viết trước khi A3 và B1 xong.
-- Xong khi: chạy trên checkpoint của `train.py --fast`, ra đúng file CSV với đúng cột.
+- Ghi thêm `results/efficiency.csv` (params, latency) theo mục 5.
+- Viết trước bằng mô hình giả; khi PR của A merge thì thử trên checkpoint `--fast` thật.
+- Xong khi: ra đúng file CSV với đúng cột.
 
-**C3. Notebook 04 (tổng hợp và kết luận RQ) và 05 (Grad-CAM, phân tích lỗi), demo Gradio, poster, slide.** Chạy E4 và E5 (3 seed).
+**C3. Chạy E4 và E5** (3 seed), ghi từng run vào Google Sheet, chép log lên Drive.
+
+**C4. Notebook 04 (tổng hợp và kết luận RQ) và 05 (Grad-CAM, ma trận nhầm lẫn, ví dụ sai), demo Gradio.**
+
+**C5. Slide, báo cáo chương 4, tài liệu tham khảo, bảng phân công và tỷ lệ đóng góp.** Slide theo khung của file mẫu: Introduction, Related Works, Proposed Method, Experiments and Discussion, Conclusion.
 
 ## Thứ tự
 
-1. A merge PR dữ liệu hiện tại. B và C bắt đầu B1, C1, C2 song song.
-2. A làm A1, A2, A3. Khi A3 merge thì B và C chạy được `--fast` thật.
+1. A làm A0, rồi A2 và A3 trong một PR (`feat/train`). Cùng lúc, C làm C0, C1, C2; B viết mô hình trong nhánh riêng.
+2. Khi PR `feat/train` được merge, B đăng ký resnet18 và plain18, C thử `evaluate.py` trên checkpoint thật, mọi người chạy được `--fast`.
 3. Cả nhóm họp ngắn ngày chạy smoke test đầu tiên để chốt kết quả mốc 1 trong kế hoạch.

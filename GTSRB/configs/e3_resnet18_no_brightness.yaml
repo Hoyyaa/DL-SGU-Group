@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e3
+model: {name: resnet18}
+aug: {brightness: false}

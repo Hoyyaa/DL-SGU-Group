@@ -1,0 +1,3 @@
+_base_: base.yaml
+name: e2
+model: {name: resnet18}

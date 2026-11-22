@@ -15,7 +15,7 @@ Mọi module phải khớp các điều dưới đây. Nếu cần đổi, mở 
 
 Ảnh luôn là [0,1] khi đi qua các bước làm tối / làm mờ. **Chuẩn hóa mean/std nằm trong mô hình** (xem mục 2).
 
-## 2. Mô hình (B)
+## 2. Mô hình (A viết khung và SmallCNN, B viết ResNet)
 
 ```python
 from gtsrb.models import build_model
@@ -23,7 +23,8 @@ model = build_model("resnet18")   # "small_cnn" | "resnet18" | "plain18"
 logits = model(x)                 # x: (B,3,64,64) trong [0,1]  ->  logits: (B,43)
 ```
 
-- `build_model(name, num_classes=43, mean=None, std=None)`. Nếu `mean` là None thì đọc `data/splits/norm_stats.json`.
+- `build_model(name, num_classes=43, mean=None, std=None)` nằm trong `models/__init__.py`. Nếu `mean` là None thì đọc `data/splits/norm_stats.json`.
+- Mô hình được đăng ký trong dict `NETS` ở cùng file (`"small_cnn"` đã có). Thêm mô hình: viết lớp trong file riêng rồi thêm một dòng vào `NETS`; không sửa chữ ký `build_model`.
 - Mô hình tự chuẩn hóa đầu vào (lớp `Classifier(net, mean, std)` bọc mạng thật). Mạng thật lấy qua `model.net`.
 - ResNet-18: stem kiểu CIFAR (conv 3×3 stride 1 rồi MaxPool(3,2,1)), ra 64×32×32 rồi qua 4 stage, kết thúc 512×4×4.
 - Plain-18 = ResNet-18 bỏ phép cộng và các shortcut 1×1, mọi thứ khác giữ nguyên.
@@ -60,6 +61,11 @@ Thư mục run: `<out_dir>/<name>_s<seed>/` (ví dụ `runs/e2_s42/`, `name` l�
 
 Seed luôn lấy từ `--seed`, không ghi cứng trong YAML thí nghiệm. `best.pt` và `last.pt` không vào Git.
 
+- `--fast`: khoảng 10% dữ liệu và tối đa 2 epoch, chỉ để thử pipeline. Không dùng kết quả `--fast` làm số liệu thật.
+- Thư mục run đã có `last.pt` mà không có `--resume` thì `train.py` dừng và báo lỗi, không ghi đè.
+- `--stop_after N` (dùng trong test) dừng sau N epoch để thử `--resume`.
+- `env.json` gồm `git_commit`, `git_dirty` (true nghĩa là có thay đổi chưa commit lúc chạy), `python`, `torch`, `cuda`, `gpu`, `params`. Các run dùng làm số liệu cuối phải có `git_dirty: false`.
+
 ## 5. Chấm điểm (C), `python -m gtsrb.evaluate`
 
 ```bash
@@ -73,3 +79,10 @@ Ghi `results/eval/<name>_s<seed>.csv` (mỗi run một file, để nhiều ngư�
 - `level` là chuỗi: `-`, `0.70`, `0.55`, `0.35`, `1.0`, `1.5`, `2.5`.
 - `macro_f1` và `acc` tính theo thang 0–1.
 - Đọc CSV bằng `pd.read_csv(p, dtype={"level": str})`.
+- Ngoài ra `evaluate.py` ghi `results/efficiency.csv` với cột `exp, seed, params, latency_ms, device`. Latency là ms trên một ảnh (batch 1), lấy trung bình 100 lần sau 10 lần chạy khởi động, ghi rõ chạy trên GPU hay CPU.
+
+## 6. Quản lý thí nghiệm (C duy trì)
+
+- **Drive chung:** `gtsrb/runs/<name>_s<seed>/` (checkpoint, log), `gtsrb/results/`, `gtsrb/figures/`. Mở quyền xem cho giảng viên khi nộp.
+- **Google Sheet nhật ký**, mỗi lần chạy một dòng, các cột: `exp_id, ngày, người chạy, file config, seed, git tag, git_dirty, trạng thái, val_macro_f1, test_macro_f1, params, thời gian huấn luyện, latency_ms, GPU, link Drive, ghi chú`.
+- `test_macro_f1` chỉ điền sau khi đã gắn tag `exp-v1`. Run thất bại hoặc bất lợi vẫn ghi vào Sheet với trạng thái tương ứng, không xóa.

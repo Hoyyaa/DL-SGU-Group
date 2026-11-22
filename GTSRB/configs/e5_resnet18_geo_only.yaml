@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e5
+model: {name: resnet18}
+aug: {brightness: false, blur: false}

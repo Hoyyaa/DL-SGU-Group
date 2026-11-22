@@ -1,0 +1,3 @@
+_base_: base.yaml
+name: e6
+model: {name: plain18}
