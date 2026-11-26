@@ -1,0 +1,11 @@
+# RQ2 – VGG16 pretrained, phóng ảnh lên 128x128
+exp_id: EXP07_vgg16_128
+model: vgg16
+input_mode: imagenet
+image_size: 128
+optimizer: sgd_nesterov
+lr: 0.001
+weight_decay: 0.0001
+batch_size: 32
+epochs: 30
+patience: 7

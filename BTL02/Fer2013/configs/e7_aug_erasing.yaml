@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e7_aug_erasing
+aug: {erasing: 0.5}
+wandb: {group: C_training}

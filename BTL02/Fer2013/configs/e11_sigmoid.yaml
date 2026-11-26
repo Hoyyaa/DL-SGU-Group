@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e11_sigmoid
+model: {activation: sigmoid}
+wandb: {group: D_activation}

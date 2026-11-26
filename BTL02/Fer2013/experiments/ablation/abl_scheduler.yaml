@@ -1,0 +1,10 @@
+# RQ3 – Lịch learning rate
+sweep: true
+base:
+  model: medium_cnn
+  batch_norm: true
+variants:
+  ABL_sched_none:          {scheduler: none}
+  ABL_sched_plateau:       {scheduler: plateau}
+  ABL_sched_cosine:        {scheduler: cosine}
+  ABL_sched_warmup_cosine: {scheduler: warmup_cosine, scheduler_params: {warmup_epochs: 3}}

@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e2_medium
+model: {name: medium, batchnorm: false}
+wandb: {group: A_architecture}

@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e4_large
+model: {name: large, batchnorm: false}
+wandb: {group: A_architecture}

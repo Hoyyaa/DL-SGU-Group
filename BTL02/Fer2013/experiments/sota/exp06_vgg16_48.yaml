@@ -1,0 +1,11 @@
+# RQ2 – FAIL CASE trong demo_report: VGG16 pretrained với ảnh 48x48 (5 lần pooling → 1x1)
+exp_id: EXP06_vgg16_48
+model: vgg16
+input_mode: imagenet
+image_size: 48
+optimizer: sgd_nesterov
+lr: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs: 30
+patience: 7

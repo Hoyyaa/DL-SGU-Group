@@ -1,0 +1,9 @@
+# Nhật ký ngày <YYYY-MM-DD> – <Tên thành viên>
+
+File: `docs/daily_logs/<YYMMDD>_<HHMM>.md`
+
+- **Task đang làm:** T0xxx – <mô tả>
+- **Đã làm:** …
+- **Thí nghiệm đã chạy:** <EXP_ID> → private acc …, link run trên Drive …
+- **Vấn đề gặp phải:** … (nếu là bug → tạo `docs/fix_logs/…`)
+- **Kế hoạch tiếp theo:** …

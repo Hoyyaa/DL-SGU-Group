@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e10_class_weight
+train: {class_weight: true}
+wandb: {group: C_training}

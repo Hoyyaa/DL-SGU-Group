@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e12_elu
+model: {activation: elu}
+wandb: {group: D_activation}

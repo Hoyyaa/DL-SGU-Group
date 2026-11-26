@@ -1,0 +1,57 @@
+data_path: D:\Documents\Deep learning\Group\DL-SGU-Group\BTL02\FER2013\data\raw
+strict_split: true
+input_mode: gray
+image_size: 48
+num_classes: 7
+batch_size: 64
+num_workers: 2
+augment: true
+aug:
+  horizontal_flip: 0.5
+  rotation: 10.0
+  translate: 0.1
+  scale: 0.1
+  random_erasing: 0.0
+model: small_cnn
+activation: relu
+batch_norm: false
+conv_dropout: 0.2
+dropout: 0.5
+global_pool: false
+pretrained: true
+freeze_backbone: false
+seed: 42
+device: auto
+epochs: 60
+patience: 10
+optimizer: adam
+lr: 0.001
+weight_decay: 0.0
+momentum: 0.9
+scheduler: plateau
+scheduler_params:
+  factor: 0.1
+  patience: 3
+  min_lr: 1.0e-06
+loss: ce
+focal_gamma: 2.0
+label_smoothing: 0.0
+grad_clip: null
+amp: true
+output_dir: outputs/runs
+summary_csv: outputs/logs/experiments_summary.csv
+evaluate_after_train: true
+mlflow: false
+wandb: false
+wandb_project: BTL02_FER2013
+wandb_entity: null
+wandb_group: null
+wandb_tags: []
+wandb_mode: online
+wandb_watch: false
+wandb_watch_freq: 200
+wandb_log_model: false
+wandb_dir: outputs/wandb
+member: ''
+notes: ''
+exp_id: EXP01_small_cnn

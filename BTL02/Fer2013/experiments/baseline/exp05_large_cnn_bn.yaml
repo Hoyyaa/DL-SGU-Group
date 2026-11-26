@@ -1,0 +1,9 @@
+# RQ1 – LARGE-CNN + BatchNorm + GlobalAvgPool (bản cải tiến của nhóm)
+exp_id: EXP05_large_cnn_bn
+model: large_cnn
+batch_norm: true
+global_pool: true
+fc_dim: 512
+optimizer: adamw
+weight_decay: 0.0001
+scheduler: cosine

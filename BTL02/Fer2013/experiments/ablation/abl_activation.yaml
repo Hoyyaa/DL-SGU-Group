@@ -1,0 +1,11 @@
+# RQ3 – Hàm kích hoạt (đề bài: ReLU, sigmoid, ...) trên MEDIUM-CNN + BN
+sweep: true
+base:
+  model: medium_cnn
+  batch_norm: true
+variants:
+  ABL_act_relu:       {activation: relu}
+  ABL_act_leaky_relu: {activation: leaky_relu}
+  ABL_act_elu:        {activation: elu}
+  ABL_act_gelu:       {activation: gelu}
+  ABL_act_sigmoid:    {activation: sigmoid}

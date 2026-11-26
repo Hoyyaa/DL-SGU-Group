@@ -1,0 +1,4 @@
+# RQ1 – LARGE-CNN (4 block: 4x64, 4x128, 4x256, 4x512) – không BN dễ khó hội tụ
+exp_id: EXP04_large_cnn
+model: large_cnn
+lr: 0.0005

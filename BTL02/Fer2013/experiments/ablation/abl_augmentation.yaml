@@ -1,0 +1,10 @@
+# RQ3 – Data augmentation (so khoảng cách train–val để đo overfitting)
+sweep: true
+base:
+  model: medium_cnn
+  batch_norm: true
+variants:
+  ABL_aug_none:     {augment: false}
+  ABL_aug_basic:    {aug: {horizontal_flip: 0.5, rotation: 0.0, translate: 0.0, scale: 0.0, random_erasing: 0.0}}
+  ABL_aug_standard: {aug: {horizontal_flip: 0.5, rotation: 10.0, translate: 0.1, scale: 0.1, random_erasing: 0.0}}
+  ABL_aug_advanced: {aug: {horizontal_flip: 0.5, rotation: 15.0, translate: 0.1, scale: 0.15, random_erasing: 0.25}}

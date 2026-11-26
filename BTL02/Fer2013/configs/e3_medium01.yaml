@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e3_medium01
+model: {name: medium01, batchnorm: false}
+wandb: {group: A_architecture}
