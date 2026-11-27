@@ -3,6 +3,7 @@
 Mỗi batch: x (B,1,48,48) float32 trong [0,1] (chưa chuẩn hóa), y (B,) int64 trong 0..6.
 Chuẩn hóa mean/std nằm trong mô hình. Augmentation CHỈ áp dụng cho tập train.
 """
+import os
 from pathlib import Path
 
 import numpy as np
@@ -59,6 +60,18 @@ def _subset(idx: np.ndarray, fast: bool, seed: int) -> np.ndarray:
     return np.sort(rng.permutation(idx)[: max(len(idx) // 10, 1)])
 
 
+def resolve_workers(value) -> int:
+    """'auto' -> 0 trên Windows, 2 nơi khác (Colab/Linux).
+
+    Trên Windows mỗi worker là một tiến trình mới nạp lại toàn bộ DLL CUDA của torch (vài GB bộ nhớ ảo),
+    dễ gây "WinError 1455: paging file is too small" hoặc CUDA OOM giả dù VRAM còn trống.
+    Dữ liệu 48x48 đã nằm sẵn trong RAM nên 0 worker gần như không chậm hơn.
+    """
+    if value in (None, "auto"):
+        return 0 if os.name == "nt" else 2
+    return int(value)
+
+
 def build_loader(cfg, split: str, fast: bool = False, data: dict | None = None) -> DataLoader:
     """split: 'train' (có augmentation, xáo trộn) | 'val' | 'test' (không augmentation)."""
     data = data if data is not None else load_cache(cfg)
@@ -66,8 +79,9 @@ def build_loader(cfg, split: str, fast: bool = False, data: dict | None = None) 
     is_train = split == "train"
     ds = FERDataset(data["x"][idx], data["y"][idx], build_transform(cfg["aug"]) if is_train else None)
     t = cfg["train"]
-    return DataLoader(ds, batch_size=t["batch_size"], shuffle=is_train, num_workers=t.get("num_workers", 0),
-                      pin_memory=torch.cuda.is_available(), persistent_workers=t.get("num_workers", 0) > 0,
+    workers = resolve_workers(t.get("num_workers", "auto"))
+    return DataLoader(ds, batch_size=t["batch_size"], shuffle=is_train, num_workers=workers,
+                      pin_memory=torch.cuda.is_available(), persistent_workers=workers > 0,
                       generator=torch.Generator().manual_seed(cfg.get("seed", 42)) if is_train else None)
 
 

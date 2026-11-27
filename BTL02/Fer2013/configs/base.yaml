@@ -27,12 +27,12 @@ train:
   class_weight: false
   label_smoothing: 0.0
   amp: true
-  num_workers: 2
+  num_workers: auto  # auto = 0 trên Windows (tránh lỗi paging file / OOM giả), 2 trên Colab/Linux
 seed: 42
 wandb:               # Weights & Biases, tắt mặc định. Bật nhanh: python -m fer.train ... --wandb
   enable: false
   project: BTL02_FER2013
-  entity: dl-sgu-btl02       # tên team trên W&B nếu cả nhóm dùng chung; null = tài khoản cá nhân
+  entity: null       # null = entity mặc định của tài khoản đang login; hoặc tên team đã tạo thật trên W&B
   group: null        # mỗi file e*.yaml đặt group theo nhóm thí nghiệm để lọc trên dashboard
   tags: []
   mode: online       # online | offline (không mạng, sync sau) | disabled

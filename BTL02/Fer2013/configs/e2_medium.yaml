@@ -1,4 +1,6 @@
 _base_: base.yaml
 name: e2_medium
 model: {name: medium, batchnorm: false}
+# Báo cáo mẫu comment ReduceLROnPlateau -> lr cố định, chỉ EarlyStopping(10)
+train: {scheduler: none}
 wandb: {group: A_architecture}

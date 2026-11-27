@@ -1,0 +1,419 @@
+2026-11-27 23:43:10,375 INFO    MainThread:32952 [wandb_init.py:setup_run_log_directory():739] Logging user logs to D:\Documents\Deep learning\Group\DL-SGU-Group\BTL02\Fer2013\outputs\wandb\wandb\run-20261127_234310-a63d1438\logs\debug.log
+2026-11-27 23:43:10,376 INFO    MainThread:32952 [wandb_init.py:setup_run_log_directory():740] Logging internal logs to D:\Documents\Deep learning\Group\DL-SGU-Group\BTL02\Fer2013\outputs\wandb\wandb\run-20261127_234310-a63d1438\logs\debug-internal.log
+2026-11-27 23:43:10,376 INFO    MainThread:32952 [wandb_init.py:init():783] calling init triggers
+2026-11-27 23:43:10,376 INFO    MainThread:32952 [wandb_init.py:init():788] wandb.init called with sweep_config: {}
+config: {'name': 'base', 'data': {'cache': 'data/processed/fer48.npz'}, 'aug': {'enable': True, 'hflip': True, 'rotation': 10, 'shift': 0.1, 'zoom': 0.1, 'erasing': 0.0}, 'model': 'small_cnn', 'train': {'epochs': 100, 'batch_size': 64, 'optimizer': 'adam', 'lr': 0.001, 'weight_decay': 0.0, 'scheduler': 'plateau', 'lr_patience': 3, 'early_stop_patience': 10, 'class_weight': False, 'label_smoothing': 0.0, 'amp': True, 'num_workers': 'auto'}, 'seed': 42, 'wandb': {'enable': False, 'project': 'BTL02_FER2013', 'entity': None, 'group': None, 'tags': [], 'mode': 'online', 'log_model': False, 'watch': False, 'dir': 'runs/wandb'}, 'exp_id': 'EXP01_small_cnn', 'data_path': 'C:\\Users\\MY PC\\AppData\\Local\\Temp\\pytest-of-MY PC\\pytest-22\\data0\\fer2013.csv', 'strict_split': False, 'epochs': 3, 'batch_size': 16, 'num_workers': 0, 'output_dir': 'C:\\Users\\MY PC\\AppData\\Local\\Temp\\pytest-of-MY PC\\pytest-22\\test_resume_restores_state0\\runs', 'summary_csv': 'C:\\Users\\MY PC\\AppData\\Local\\Temp\\pytest-of-MY PC\\pytest-22\\test_resume_restores_state0\\s.csv', 'blocks': [[8], [16]], 'fc_dim': 16, 'evaluate_after_train': False, '_wandb': {}}
+2026-11-27 23:43:14,571 INFO    wandb-AsyncioManager-main:32952 [service_client.py:_forward_responses():122] [no run ID] Reached EOF.
+2026-11-27 23:43:14,571 INFO    wandb-AsyncioManager-main:32952 [mailbox.py:close():154] [no run ID] Closing mailbox, abandoning 2 handles.
+2026-11-27 23:43:14,572 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\run_messages.py", line 90, in loop
+    await asyncio_compat.race(
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_compat.py", line 279, in race
+    async with open_task_group(race=True) as tg:
+  File "C:\Program Files\Python311\Lib\contextlib.py", line 217, in __aexit__
+    await anext(self.gen)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_compat.py", line 241, in open_task_group
+    await task_group._wait_all(race=race, timeout=exit_timeout)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_compat.py", line 181, in _wait_all
+    raise exc
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\run_messages.py", line 113, in _print_all
+    result = await handle.wait_async(timeout=None)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\mailbox\mailbox_handle.py", line 127, in wait_async
+    response = await self._handle.wait_async(timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\mailbox\response_handle.py", line 123, in wait_async
+    raise HandleAbandonedError()
+wandb.sdk.mailbox.mailbox_handle.HandleAbandonedError
+2026-11-27 23:43:15,975 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:15,999 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,000 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,002 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,002 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,003 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,004 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,004 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,005 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,471 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,472 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,472 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,473 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,475 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,475 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,476 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,476 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,477 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:16,478 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:21,406 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:21,407 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:21,966 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost
+2026-11-27 23:43:21,969 ERROR   wandb-AsyncioManager-main:32952 [asyncio_manager.py:fn_wrap_exceptions():197] Uncaught exception in run_soon callback.
+Traceback (most recent call last):
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\asyncio_manager.py", line 195, in fn_wrap_exceptions
+    await fn()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 42, in publish
+    await self._send_server_request(request)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 75, in _send_server_request
+    raise self._broken_exc.with_traceback(self._broken_tb)
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 84, in _send_server_request
+    await self._drain_writer()
+  File "C:\Users\MY PC\AppData\Roaming\Python\Python311\site-packages\wandb\sdk\lib\service\service_client.py", line 92, in _drain_writer
+    await self._writer.drain()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 392, in drain
+    await self._protocol._drain_helper()
+  File "C:\Program Files\Python311\Lib\asyncio\streams.py", line 166, in _drain_helper
+    raise ConnectionResetError('Connection lost')
+ConnectionResetError: Connection lost

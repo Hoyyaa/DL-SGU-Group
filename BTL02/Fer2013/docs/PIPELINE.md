@@ -22,7 +22,7 @@
 2. **train** – train trên `train`, theo dõi `val`.
    - Chọn `best.pt` theo `val_acc`.
    - EarlyStopping theo `early_stop_patience` (mặc định 10, như báo cáo mẫu).
-   - ReduceLROnPlateau theo `val_loss` (factor 0.1, patience 3).
+   - ReduceLROnPlateau theo `val_loss` (factor 0.1, patience 3). Báo cáo mẫu tắt callback này nên e1–e4 dùng `scheduler: none` để tái lập đúng.
    - `log.csv`: `epoch, train_loss, train_acc, val_loss, val_acc, val_macro_f1, lr, sec`.
 3. **evaluate** – chấm `best.pt` trên val và **test**. Test là con số chính để báo cáo vì val đã
    dùng để chọn checkpoint (hơi lạc quan). So với mốc world-best 69% (PublicTest) / 71% (PrivateTest).

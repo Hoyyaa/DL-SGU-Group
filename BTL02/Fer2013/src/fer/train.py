@@ -7,7 +7,7 @@
 
 Kết quả ở <out_dir>/<name>_s<seed>/: best.pt, last.pt, config.yaml, log.csv, env.json.
 Chọn best.pt theo val_acc trên tập val. Tập test không được dùng ở đây.
-Tương đương callbacks của báo cáo mẫu: ModelCheckpoint, CSVLogger, EarlyStopping, ReduceLROnPlateau.
+Tương đương callbacks của báo cáo mẫu: ModelCheckpoint, CSVLogger, EarlyStopping (mẫu tắt ReduceLROnPlateau; ở đây là tùy chọn).
 """
 import argparse
 import csv
@@ -48,6 +48,21 @@ def env_info(model) -> dict:
         "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
         "params": count_params(model),
     }
+
+
+def amp_supported(device) -> bool:
+    """AMP (fp16) chỉ bật trên GPU chạy fp16 đúng.
+
+    GTX 16xx (GTX 1650/1660, Turing không Tensor Core) có lỗi cuDNN: conv fp16 trả NaN ngay batch đầu
+    (đã kiểm tra trên GTX 1650: fp32 loss 2.07, fp16 loss NaN). Các card này chạy fp32.
+    """
+    if device.type != "cuda":
+        return False
+    name = torch.cuda.get_device_name(device)
+    if "GTX 16" in name:
+        print(f"[amp] {name}: fp16 bị lỗi NaN trên dòng GTX 16xx, tự tắt AMP (chạy fp32).")
+        return False
+    return True
 
 
 def build_optimizer(model, t):
@@ -148,7 +163,7 @@ def main(argv=None) -> Path:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    use_amp = bool(t.get("amp", False)) and device.type == "cuda"
+    use_amp = amp_supported(device) if t.get("amp", False) else False
     train_loader, val_loader, data = build_dataloaders(cfg, fast=a.fast)
     mean, std = float(data["mean"]), float(data["std"])
 
