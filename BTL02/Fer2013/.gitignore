@@ -11,3 +11,5 @@ __pycache__/
 /results/**/*.npz
 *.pt
 *.pth
+logs/
+/runs_old_init/
