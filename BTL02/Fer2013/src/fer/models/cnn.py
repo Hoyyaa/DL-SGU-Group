@@ -56,6 +56,21 @@ class FerCNN(nn.Module):
             d = h
         head.append(nn.Linear(d, num_classes))
         self.classifier = nn.Sequential(*head)
+        self._init_weights(activation)
+
+    def _init_weights(self, activation: str):
+        """Init mặc định của PyTorch (kaiming_uniform a=√5) làm tín hiệu nhỏ đi ~6 lần mỗi lớp ReLU:
+        mạng 8–16 conv không BN có gradient ~1e-8, bị eps của Adam nuốt nên kẹt ở 25% (luôn đoán Happy).
+        Kaiming giữ phương sai qua ReLU; sigmoid/tanh dùng Xavier. Bias = 0 như Keras."""
+        relu_like = activation in ("relu", "leaky_relu", "elu", "gelu")
+        for m in self.modules():
+            if isinstance(m, (nn.Conv2d, nn.Linear)):
+                if relu_like:
+                    nn.init.kaiming_normal_(m.weight, nonlinearity="relu")
+                else:
+                    nn.init.xavier_uniform_(m.weight)
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
 
     def forward(self, x):  # x: (B,1,48,48) trong [0,1] -> logits (B,7)
         return self.classifier(self.features(self.norm(x)))

@@ -50,7 +50,7 @@ Nhóm A tái lập báo cáo mẫu. Từ nhóm C trở đi **chỉ đổi một 
 | e1_small | Small, không BN | Tái lập mẫu (mẫu: val_acc 0.64) |
 | e2_medium | Medium, không BN | (mẫu: 0.67) |
 | e3_medium01 | Medium01, không BN | (mẫu: 0.65) |
-| e4_large | Large, không BN | (mẫu: 0.67). Sâu hơn có tốt hơn? |
+| e4_large | Large, không BN, lr 1e-4 (1e-3 không hội tụ) | (mẫu: 0.67). Sâu hơn có tốt hơn? |
 | **e5_large_bn** | Large + BatchNorm | **Mô hình tham chiếu.** BN giúp mạng sâu hội tụ? |
 | e6_no_aug | tắt augmentation | Augmentation giảm overfit bao nhiêu? (xem khoảng cách train/val trong `curves.png`) |
 | e7_aug_erasing | + RandomErasing 0.5 | Che một phần mặt có giúp tổng quát? |

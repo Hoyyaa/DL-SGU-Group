@@ -83,7 +83,7 @@ python -m fer.visualize --run runs/e5_large_bn_s42      # (thêm --no_wandb nế
 - `--set wandb.log_model=true` đẩy `best.pt` lên Artifact; `wandb.watch=true` ghi histogram gradient.
 - Lỗi mạng hoặc chưa login thì chỉ in cảnh báo, việc train vẫn tiếp tục. Số liệu gốc vẫn nằm ở `runs/` và `results/`.
 
-Chạy toàn bộ: `bash scripts/run_all.sh` (thêm `WANDB=1` ở đầu để ghi log lên W&B) (hoặc truyền danh sách config: `bash scripts/run_all.sh configs/e1_small.yaml configs/e5_large_bn.yaml`).
+Chạy toàn bộ trên Windows: `powershell -ExecutionPolicy Bypass -File scripts/run_all.ps1 -Wandb` (log ở `logs/`, chạy lại sẽ tiếp tục từ chỗ dừng). Linux/Colab: `bash scripts/run_all.sh` (thêm `WANDB=1` ở đầu để ghi log lên W&B) (hoặc truyền danh sách config: `bash scripts/run_all.sh configs/e1_small.yaml configs/e5_large_bn.yaml`).
 
 ## Cấu trúc
 
