@@ -1,0 +1,6 @@
+_base_: base.yaml
+name: e4_large
+model: {name: large, batchnorm: false}
+# Báo cáo mẫu comment ReduceLROnPlateau -> lr cố định, chỉ EarlyStopping(10)
+train: {scheduler: none}
+wandb: {group: A_architecture}

@@ -1,0 +1,13 @@
+# RQ2 – Đối chứng: ResNet50 huấn luyện từ đầu (không ImageNet) để đo lợi ích pretrained
+exp_id: EXP10_resnet50_scratch_128
+model: resnet50
+pretrained: false
+input_mode: imagenet
+image_size: 128
+optimizer: adamw
+lr: 0.001
+weight_decay: 0.0001
+scheduler: cosine
+batch_size: 32
+epochs: 40
+patience: 10

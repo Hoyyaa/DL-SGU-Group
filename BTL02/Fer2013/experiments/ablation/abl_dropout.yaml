@@ -1,0 +1,9 @@
+# RQ1/RQ3 – Regularization: dropout & batch norm
+sweep: true
+base:
+  model: medium_cnn
+variants:
+  ABL_reg_no_dropout:  {conv_dropout: 0.0, dropout: 0.0}
+  ABL_reg_dropout:     {conv_dropout: 0.2, dropout: 0.5}
+  ABL_reg_bn:          {batch_norm: true, conv_dropout: 0.0, dropout: 0.5}
+  ABL_reg_bn_dropout:  {batch_norm: true, conv_dropout: 0.2, dropout: 0.5}

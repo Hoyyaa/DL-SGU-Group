@@ -1,0 +1,12 @@
+# RQ2 – EfficientNet-B0 pretrained 128x128
+exp_id: EXP09_efficientnet_b0_128
+model: efficientnet_b0
+input_mode: imagenet
+image_size: 128
+optimizer: adamw
+lr: 0.0003
+weight_decay: 0.0001
+scheduler: cosine
+batch_size: 32
+epochs: 30
+patience: 7

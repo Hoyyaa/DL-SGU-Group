@@ -1,0 +1,6 @@
+_base_: base.yaml
+name: e3_medium01
+model: {name: medium01, batchnorm: false}
+# Báo cáo mẫu comment ReduceLROnPlateau -> lr cố định, chỉ EarlyStopping(10)
+train: {scheduler: none}
+wandb: {group: A_architecture}

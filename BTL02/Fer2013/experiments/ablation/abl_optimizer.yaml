@@ -1,0 +1,10 @@
+# RQ3 – Thuật toán tối ưu
+sweep: true
+base:
+  model: medium_cnn
+  batch_norm: true
+variants:
+  ABL_opt_adam:         {optimizer: adam, lr: 0.001}
+  ABL_opt_adamw:        {optimizer: adamw, lr: 0.001, weight_decay: 0.0001}
+  ABL_opt_sgd_nesterov: {optimizer: sgd_nesterov, lr: 0.01, weight_decay: 0.0005}
+  ABL_opt_rmsprop:      {optimizer: rmsprop, lr: 0.0005}

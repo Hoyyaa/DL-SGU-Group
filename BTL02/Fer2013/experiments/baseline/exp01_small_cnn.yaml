@@ -1,0 +1,3 @@
+# RQ1 – Baseline: SMALL-CNN theo demo_report (2 block)
+exp_id: EXP01_small_cnn
+model: small_cnn

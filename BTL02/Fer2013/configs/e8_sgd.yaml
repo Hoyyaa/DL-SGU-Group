@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e8_sgd
+train: {optimizer: sgd, lr: 0.01}
+wandb: {group: C_training}

@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e9_adamw_cosine
+train: {optimizer: adamw, weight_decay: 0.0001, scheduler: cosine, epochs: 60, early_stop_patience: 100}
+wandb: {group: C_training}

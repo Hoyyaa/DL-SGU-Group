@@ -1,0 +1,10 @@
+# RQ3 – Xử lý mất cân bằng lớp (Disgust chỉ ~1.5% dữ liệu) → theo dõi macro-F1
+sweep: true
+base:
+  model: medium_cnn
+  batch_norm: true
+variants:
+  ABL_loss_ce:             {loss: ce}
+  ABL_loss_weighted_ce:    {loss: weighted_ce}
+  ABL_loss_focal:          {loss: focal}
+  ABL_loss_label_smooth:   {loss: ce, label_smoothing: 0.1}

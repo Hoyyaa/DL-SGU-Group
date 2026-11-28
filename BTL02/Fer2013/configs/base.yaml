@@ -1,0 +1,41 @@
+# Mặc định chung. File thí nghiệm khai báo `_base_: base.yaml` rồi chỉ ghi phần khác.
+name: base
+data:
+  cache: data/processed/fer48.npz
+aug:                 # chỉ áp dụng cho tập train
+  enable: true
+  hflip: true
+  rotation: 10       # độ
+  shift: 0.1         # tỉ lệ chiều rộng / cao
+  zoom: 0.1
+  erasing: 0.0       # xác suất RandomErasing, 0 = tắt
+model:
+  name: large
+  activation: relu
+  batchnorm: true
+  drop_conv: 0.2
+  drop_fc: 0.5
+train:
+  epochs: 100
+  batch_size: 64
+  optimizer: adam    # adam | adamw | sgd (momentum 0.9, nesterov)
+  lr: 0.001
+  weight_decay: 0.0
+  scheduler: plateau # plateau (ReduceLROnPlateau theo val_loss) | cosine | none
+  lr_patience: 3
+  early_stop_patience: 10
+  class_weight: false
+  label_smoothing: 0.0
+  amp: true
+  num_workers: auto  # auto = 0 trên Windows (tránh lỗi paging file / OOM giả), 2 trên Colab/Linux
+seed: 42
+wandb:               # Weights & Biases, tắt mặc định. Bật nhanh: python -m fer.train ... --wandb
+  enable: false
+  project: BTL02_FER2013
+  entity: null       # null = entity mặc định của tài khoản đang login; hoặc tên team đã tạo thật trên W&B
+  group: null        # mỗi file e*.yaml đặt group theo nhóm thí nghiệm để lọc trên dashboard
+  tags: []
+  mode: online       # online | offline (không mạng, sync sau) | disabled
+  log_model: false   # true: đẩy best.pt lên W&B Artifact (tốn dung lượng)
+  watch: false       # true: histogram gradient / trọng số (chậm hơn)
+  dir: runs/wandb

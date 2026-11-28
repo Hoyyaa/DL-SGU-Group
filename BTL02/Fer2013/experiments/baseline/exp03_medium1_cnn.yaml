@@ -1,0 +1,3 @@
+# RQ1 – MEDIUM_01-CNN (3 block: 3x64, 4x128, 4x256)
+exp_id: EXP03_medium1_cnn
+model: medium1_cnn

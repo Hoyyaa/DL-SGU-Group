@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e13_leaky_relu
+model: {activation: leaky_relu}
+wandb: {group: D_activation}

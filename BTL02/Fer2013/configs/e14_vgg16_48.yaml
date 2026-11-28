@@ -1,0 +1,5 @@
+_base_: base.yaml
+name: e14_vgg16_48
+model: {name: vgg16, resize: 48, pretrained: true}
+train: {lr: 0.0001}
+wandb: {group: E_transfer}

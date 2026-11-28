@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e6_no_aug
+aug: {enable: false}
+wandb: {group: C_training}

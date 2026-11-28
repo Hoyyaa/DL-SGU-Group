@@ -1,0 +1,4 @@
+_base_: base.yaml
+name: e5_large_bn
+model: {name: large, batchnorm: true}
+wandb: {group: B_reference}
