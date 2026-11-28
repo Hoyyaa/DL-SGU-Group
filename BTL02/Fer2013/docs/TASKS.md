@@ -7,12 +7,12 @@ Phân công theo yêu cầu đề: **trục dọc** = nhóm công việc có ng�
 
 | WP | Nội dung | Phụ trách | Đầu ra chính |
 |---|---|---|---|
-| WP1 | Dữ liệu & EDA | | `src/data/`, `outputs/figures/eda/`, mục 1 báo cáo |
-| WP2 | Custom CNN (RQ1) | | `src/models/cnn.py`, EXP01–EXP05 |
-| WP3 | Transfer learning (RQ2) | | `src/models/pretrained.py`, EXP06–EXP10 |
-| WP4 | Ablation: activation, optimizer, aug, loss, scheduler (RQ3) | | `experiments/ablation/` |
-| WP5 | Trực quan, debug, giải thích (RQ4) + demo | | `src/evaluate/`, `demo/app.py` |
-| WP6 | Báo cáo, slide, nhật ký, đóng gói nộp bài | | `docs/`, file zip `BTL02_Emotion_HoTen_MaSV.zip` |
+| WP1 | Dữ liệu & EDA | Tran Dinh Hai| `src/data/`, `outputs/figures/eda/`, mục 1 báo cáo |
+| WP2 | Custom CNN (RQ1) |Le Thanh Nhan| `src/models/cnn.py`, EXP01–EXP05 |
+| WP3 | Transfer learning (RQ2) |Tran Cong Minh | `src/models/pretrained.py`, EXP06–EXP10 |
+| WP4 | Ablation: activation, optimizer, aug, loss, scheduler (RQ3) | Tran Dinh Hai & Tran Cong Minh | `experiments/ablation/` |
+| WP5 | Trực quan, debug, giải thích (RQ4) + demo |Le Thanh Nhan & Tran Dinh Hai| `src/evaluate/`, `demo/app.py` |
+| WP6 | Báo cáo, slide, nhật ký, đóng gói nộp bài | Tran Dinh Hai & Tran Cong Minh & Le Thanh Nhan| `docs/`, file zip `BTL02_Emotion_HoTen_MaSV.zip` |
 
 ## Trục ngang – danh sách task
 
